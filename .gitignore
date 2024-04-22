@@ -1,3 +1,4 @@
 .idea
 project/.env
+project/backend/src/db/diplom_sun_corner.db
 venv
