@@ -1,4 +1,5 @@
 .idea
-project/.env
-project/backend/src/db/diplom_sun_corner.db
 venv
+project/.env
+instance/diplom_sun_corner.db
+project/backend/src/telegram/commands/pictures/image-1.jpg

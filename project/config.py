@@ -22,11 +22,17 @@ class SSLCert:
     ssl_key:  str
 
 @dataclass
+class Images:
+    path: str
+
+
+@dataclass
 class Config:
     tg_bot: TgBot
     db:     DatabaseConfig
     flask:  FlaskConfig
     ssl:    SSLCert
+    images: Images
 
 
 env: Env = Env()
@@ -47,5 +53,8 @@ config = Config(
         ssl_path = env('SSL_PATH'),
         ssl_cert = env('SSL_CERT_FILE'),
         ssl_key  = env('SSL_KEY_FILE')
+    ),
+    images = Images(
+        path = env('IMAGES_PATH')
     )
 )

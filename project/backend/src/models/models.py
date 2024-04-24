@@ -3,6 +3,25 @@ from flask_login import UserMixin
 from project.backend.src.db.db_app import db
 
 
+class Tables:
+    def __init__(self, tables):
+        self.tables = tables
+
+    def reserve_table(self, table_name):
+        if self.tables[table_name]['is_reserve'] == 'N':
+            self.tables[table_name]['is_reserve'] = 'Y'
+            print(f"Стол {table_name} забронирован!")
+        else:
+            print(f"Стол {table_name} уже забронирован!")
+
+    def free_table(self, table_name):
+        if self.tables[table_name]['is_reserve'] == 'Y':
+            self.tables[table_name]['is_reserve'] = 'N'
+            print(f"Стол {table_name} освобожден.")
+        else:
+            print(f"Стол {table_name} уже свободен.")
+
+
 class Users(db.Model, UserMixin):
     user_id     = db.Column(db.Integer,     primary_key=True, autoincrement=True)
     user_name   = db.Column(db.String(128), nullable=False)
@@ -17,10 +36,10 @@ class Users(db.Model, UserMixin):
 
     @classmethod
     def create(cls,
-                     user_name:   str,
-                     tg_user_id:  int,
-                     tg_username: str,
-                     user_phone:  str):
+               user_name:   str,
+               tg_user_id:  int,
+               tg_username: str,
+               user_phone:  str):
         try:
             new_user = cls(
                 user_name=user_name,
