@@ -5,3 +5,6 @@ class UserStates(StatesGroup):
     set_phone = State()
 
     reserve_table = State()
+
+    feedback_text = State()
+    feedback_score = State()

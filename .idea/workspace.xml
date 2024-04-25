@@ -4,23 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6f638d3-12d5-4a83-bcef-21bb2691503f" name="Changes" comment="Основные модули и команда /start">
-      <change afterPath="$PROJECT_DIR$/project/backend/src/models/tables.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/description.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/feedback.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/pictures/image-1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/pictures/image-2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/reserve.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/social.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/support.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="b6f638d3-12d5-4a83-bcef-21bb2691503f" name="Changes" comment="Дополнение основных модулей, добавление новых команд.&#10;&#10;В следующий раз, сделаем ссылку на Меню ресторана">
+      <change afterPath="$PROJECT_DIR$/project/backend/src/models/feedback.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/backend/src/routes/menu_route.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/backend/src/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/models/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/commands/feedback.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/feedback.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/commands/reserve.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/reserve.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/commands/start.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/start.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/filters/lexicon/lexicon.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/filters/lexicon/lexicon.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/keyboard/reply/reply.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/keyboard/reply/reply.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/run_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/run_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/states.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/states.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +56,7 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
     &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.feedback.executor&quot;: &quot;Run&quot;,
     &quot;Python.inline.executor&quot;: &quot;Run&quot;,
     &quot;Python.run_bot.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -74,10 +70,10 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\zhazgul" />
       <recent name="C:\Users\User\Desktop\zhazgul\project\backend\src\telegram\commands\pictures" />
       <recent name="C:\Users\User\Desktop\zhazgul\project\backend\src\telegram\commands" />
       <recent name="C:\Users\User\Desktop\zhazgul\project\backend\src\db" />
-      <recent name="C:\Users\User\Desktop\zhazgul" />
       <recent name="C:\Users\User\Desktop\zhazgul\project" />
     </key>
   </component>
@@ -134,7 +130,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713795142823</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Дополнение основных модулей, добавление новых команд.&#10;&#10;В следующий раз, сделаем ссылку на Меню ресторана">
+      <option name="closed" value="true" />
+      <created>1713979968263</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713979968263</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -151,6 +155,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="преднастройка х1" />
     <MESSAGE value="Основные модули и команда /start" />
-    <option name="LAST_COMMIT_MESSAGE" value="Основные модули и команда /start" />
+    <MESSAGE value="Дополнение основных модулей, добавление новых команд.&#10;&#10;В следующий раз, сделаем ссылку на Меню ресторана" />
+    <option name="LAST_COMMIT_MESSAGE" value="Дополнение основных модулей, добавление новых команд.&#10;&#10;В следующий раз, сделаем ссылку на Меню ресторана" />
   </component>
 </project>

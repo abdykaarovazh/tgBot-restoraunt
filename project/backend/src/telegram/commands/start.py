@@ -61,3 +61,5 @@ async def set_phone(message: Message, state: FSMContext):
     except Exception as e:
         print("set phone: ", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
+    finally:
+        await state.clear()
