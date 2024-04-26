@@ -3,6 +3,6 @@ LEXICON_MENU_COMMANDS: dict[str, str] = {
     '/reserve':     'Бронь столика',              #
     '/description': 'Описание ресторана',         #
     '/feedback':    'Оставить отзыв',             #
-    '/social':      'Другие социальные сети',     ######
+    '/social':      'Другие социальные сети',     #
     '/support':     'Поддержка'                   ######
 }

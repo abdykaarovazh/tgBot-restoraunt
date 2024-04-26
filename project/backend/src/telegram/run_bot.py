@@ -6,6 +6,7 @@ from project.backend.src.telegram.commands.start import start, set_name, set_pho
 from project.backend.src.telegram.commands.reserve import reserve, confirm_reserve
 from project.backend.src.telegram.commands.description import description
 from project.backend.src.telegram.commands.feedback import feedback, write_feedback, write_score
+from project.backend.src.telegram.commands.social import social
 
 from project.backend.src.telegram.bot import dp, bot
 from project.backend.src.telegram.filters.menu import set_main_menu
@@ -35,5 +36,8 @@ if __name__ == '__main__':
     dp.message.register(feedback, Command('feedback'))
     dp.message.register(write_feedback, UserStates.feedback_text)
     dp.message.register(write_score, UserStates.feedback_score)
+
+    # Регистрация команды /social
+    dp.message.register(social, Command('social'))
 
     dp.run_polling(bot)

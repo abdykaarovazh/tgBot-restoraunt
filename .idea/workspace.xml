@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6f638d3-12d5-4a83-bcef-21bb2691503f" name="Changes" comment="Дополнение основных модулей, добавление новых команд.&#10;&#10;В следующий раз, сделаем ссылку на Меню ресторана">
-      <change afterPath="$PROJECT_DIR$/project/backend/src/models/feedback.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/backend/src/routes/menu_route.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    <list default="true" id="b6f638d3-12d5-4a83-bcef-21bb2691503f" name="Changes" comment="Сделаны reserve, feedback">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/commands/feedback.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/feedback.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/commands/reserve.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/reserve.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/commands/start.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/commands/social.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/social.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/filters/lexicon/lexicon.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/filters/lexicon/lexicon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/keyboard/inline/inline.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/keyboard/inline/inline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/keyboard/reply/reply.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/keyboard/reply/reply.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/run_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/run_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/states.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/states.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713979968263</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Сделаны reserve, feedback">
+      <option name="closed" value="true" />
+      <created>1714059537831</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714059537831</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -156,6 +160,7 @@
     <MESSAGE value="преднастройка х1" />
     <MESSAGE value="Основные модули и команда /start" />
     <MESSAGE value="Дополнение основных модулей, добавление новых команд.&#10;&#10;В следующий раз, сделаем ссылку на Меню ресторана" />
-    <option name="LAST_COMMIT_MESSAGE" value="Дополнение основных модулей, добавление новых команд.&#10;&#10;В следующий раз, сделаем ссылку на Меню ресторана" />
+    <MESSAGE value="Сделаны reserve, feedback" />
+    <option name="LAST_COMMIT_MESSAGE" value="Сделаны reserve, feedback" />
   </component>
 </project>

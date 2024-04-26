@@ -28,4 +28,4 @@ def feedback_scores() -> ReplyKeyboardMarkup:
         builder.add(KeyboardButton(text=str(i)))
     builder.adjust(1)
 
-    return builder.as_markup(resize_keyboard=True)
+    return builder.as_markup(resize_keyboard=False)

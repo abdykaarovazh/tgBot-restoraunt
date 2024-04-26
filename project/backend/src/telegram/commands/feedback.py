@@ -16,8 +16,9 @@ async def feedback(message: Message, state: FSMContext):
                              "Надеемся тебе всё понравилось! Напиши свой отзыв")
         await state.set_state(UserStates.feedback_text)
     except Exception as e:
-        print(e)
+        print("feedback: ", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
+
 
 async def write_feedback(message: Message, state: FSMContext):
     try:
@@ -30,8 +31,9 @@ async def write_feedback(message: Message, state: FSMContext):
                              "А теперь поставь нам оценку ниже!", reply_markup=kb)
         await state.set_state(UserStates.feedback_score)
     except Exception as e:
-        print(e)
+        print("write_feedback: ", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
+
 
 async def write_score(message: Message, state: FSMContext):
     try:
@@ -50,7 +52,7 @@ async def write_score(message: Message, state: FSMContext):
                                  "Для нас это очень важно, чтобы улучшать наши заведения!")
             await state.clear()
     except Exception as e:
-        print("set phone: ", e)
+        print("write_score: ", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
     finally:
         await state.clear()
