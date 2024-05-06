@@ -1,25 +1,35 @@
 from flask_login import UserMixin
-
 from project.backend.src.db.db_app import db
 
 
-class Tables:
-    def __init__(self, tables):
-        self.tables = tables
+class Tables(db.Model):
+    table_id     = db.Column(db.Integer,     primary_key=True, autoincrement=True)
+    address      = db.Column(db.String(128), nullable=False)
+    table_name   = db.Column(db.String(128), nullable=False)
+    place_count  = db.Column(db.Integer,     nullable=False)
+    is_reserve   = db.Column(db.String(1),   nullable=True)
+    user_name    = db.Column(db.String(128), nullable=True)
+    time_reserve = db.Column(db.DateTime,    nullable=True)
 
-    def reserve_table(self, table_name):
-        if self.tables[table_name]['is_reserve'] == 'N':
-            self.tables[table_name]['is_reserve'] = 'Y'
-            print(f"Стол {table_name} забронирован!")
-        else:
-            print(f"Стол {table_name} уже забронирован!")
+    @staticmethod
+    def reserve(table_name, tg_username):
+        table = Tables.query.filter_by(table_name=table_name).first()
+        if table:
+            table.is_reserve = 'Y'
+            table.user_name = tg_username
+            db.session.commit()
+        print("Столик забронирован")
+        return table
 
-    def free_table(self, table_name):
-        if self.tables[table_name]['is_reserve'] == 'Y':
-            self.tables[table_name]['is_reserve'] = 'N'
-            print(f"Стол {table_name} освобожден.")
-        else:
-            print(f"Стол {table_name} уже свободен.")
+    @staticmethod
+    def unreserve(tg_username):
+        table = Tables.query.filter_by(user_name=tg_username).first()
+        if table:
+            table.is_reserve = 'N',
+            table.user_name = None
+            db.session.commit()
+
+        return table
 
 
 class Users(db.Model, UserMixin):
@@ -40,12 +50,20 @@ class Users(db.Model, UserMixin):
                tg_user_id:  int,
                tg_username: str,
                user_phone:  str):
+        """
+        Функция создания нового пользователя в базе данных.
+        :param user_phone: str
+        :param tg_user_id: int
+        :param tg_username: str
+        :param user_name: str
+        """
         try:
             new_user = cls(
                 user_name=user_name,
                 tg_user_id=tg_user_id,
                 tg_username=tg_username,
-                user_phone=user_phone)
+                user_phone=user_phone
+            )
             db.session.add(new_user)
             db.session.commit()
 
@@ -55,3 +73,10 @@ class Users(db.Model, UserMixin):
             db.session.rollback()
         finally:
             db.session.close()
+
+
+
+
+
+
+

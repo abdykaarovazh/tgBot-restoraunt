@@ -6,20 +6,24 @@ from environs import Env
 class DatabaseConfig:
     db_name: str
 
+
 @dataclass
 class TgBot:
     token: str
+
 
 @dataclass
 class FlaskConfig:
     flask_host: str
     flask_port: int
 
+
 @dataclass
 class SSLCert:
     ssl_path: str
     ssl_cert: str
     ssl_key:  str
+
 
 @dataclass
 class Images:

@@ -6,6 +6,7 @@ from project.config import config
 
 bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
 
+
 # Кнопка меню, которая упаравляет основным функционалом
 async def set_main_menu(bot: Bot):
     main_menu_commands = [

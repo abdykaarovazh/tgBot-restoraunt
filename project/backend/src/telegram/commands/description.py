@@ -1,6 +1,7 @@
 from aiogram.types import Message, FSInputFile
 from project.config import config
 
+
 async def send_images(message: Message, image_path, text):
     for file in image_path:
         await message.answer_photo(
@@ -10,8 +11,9 @@ async def send_images(message: Message, image_path, text):
             caption=text
         )
 
+
 async def description(message: Message):
-    path = config.images.path
+    path = str(config.images.path)
 
     image_path = [path + 'image-1.jpg']
 

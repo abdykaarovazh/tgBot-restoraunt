@@ -1,4 +1,4 @@
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 
 
 # Функция возвращает список Inline-кнопок с переходом на другие соц. сети
@@ -10,5 +10,14 @@ def social_links() -> InlineKeyboardMarkup:
     instagram = InlineKeyboardButton(text="Instagram", url=instagram_link)
 
     markup = InlineKeyboardMarkup(inline_keyboard=[[tg_channel], [instagram]])
+
+    return markup
+
+
+def menu_link() -> InlineKeyboardMarkup:
+    url = 'https://restoranicafe.ru/menu'
+    button = InlineKeyboardButton(text='Меню',
+                                  web_app=WebAppInfo(url=url))
+    markup = InlineKeyboardMarkup(inline_keyboard=[[button]])
 
     return markup

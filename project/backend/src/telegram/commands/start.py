@@ -11,11 +11,10 @@ async def start(message: Message, state: FSMContext):
         with app.app_context():
             tg_username = message.from_user.username
             is_user = Users.get_current(tg_username=tg_username)
-            markup = None
+
             if is_user:
                 await message.answer("Salami! Рады, что ты снова решил обратиться к нам!\n"
-                                     "Хочешь забронировать столик? Давай посмотрим свободные столики.\n",
-                                     reply_markup=markup)
+                                     "Хочешь забронировать столик? Ты сможешь это сделать по команде /reserve")
             else:
                 await message.answer("Salami! Рады, что ты решил(а) мной воспользоваться!\n"
                                      "Давай зарегистрируем тебя у нас, чтобы ты мог без "
@@ -37,6 +36,7 @@ async def set_name(message: Message, state: FSMContext):
         print("set name: ", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
 
+
 async def set_phone(message: Message, state: FSMContext):
     try:
         with app.app_context():
@@ -57,7 +57,7 @@ async def set_phone(message: Message, state: FSMContext):
             await message.answer(f"Ты молодец, {username}! А теперь давай я тебе покажу что я имею.\n"
                                  "Обрати внимание на кнопку Меню слева, рядом с полем ввода!"
                                  "\n"
-                                 "Mogesalmebit, chemo megobaro!")
+                                 "Homogenisation, chemo barometer!")
     except Exception as e:
         print("set phone: ", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
