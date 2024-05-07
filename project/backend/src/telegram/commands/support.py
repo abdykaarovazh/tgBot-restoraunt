@@ -8,6 +8,7 @@ from project.backend.src.models.models import Tables
 from project.backend.src.telegram.keyboard.reply.reply import resto_list
 
 
+# Обработка команды /support
 async def support(message: Message, state: FSMContext):
     try:
         markup = support_questions()
@@ -21,12 +22,12 @@ async def support(message: Message, state: FSMContext):
             await state.set_state(UserStates.your_questions)
         else:
             await state.clear()
-
     except Exception as e:
         print("support: ", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
 
 
+# Обработка варианта в выборе "Сменить время бронирования"
 async def change_time(message: Message, state: FSMContext):
     try:
         with app.app_context():
@@ -36,18 +37,28 @@ async def change_time(message: Message, state: FSMContext):
             is_table = Tables.query.filter_by(user_name=tg_username, is_reserve='Y').first()
 
             if is_table:
-                await message.answer('Захотел сменить время своего забронированного столика?\n'
-                                     'Хорошо, напиши ниже время, которое тебе удобно и Администратор свяжется с тобой!')
+                await message.answer(
+                    'Захотел сменить время своего забронированного столика?\n'
+                    f'Мы увидели, что у тебя забронирован {is_table.table_name} '
+                    f'на {is_table.place_count} места по адресу {is_table.address}.\n'
+                    'Напиши ниже время, на которое тебе хотелось бы сменить '
+                    'и Администратор свяжется в ближайшее время с тобой для подтверждения времени!'
+                )
             else:
-                await message.answer('Ты ещё не бронировал(а) ни одного столика!\n'
-                                     'Ты сможешь сделать это через команду /reserve')
+                await message.answer(
+                    'Ты ещё не бронировал(а) ни одного столика!\n'
+                    'Ты сможешь сделать это через команду /reserve'
+                )
     except Exception as e:
         print("support_change: ", e)
-        await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
+        await message.answer(
+            "Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы...."
+        )
     finally:
         await state.clear()
 
 
+# Обработка варианта в выборе "Свой вопрос"
 async def menu_questions(message: Message, state: FSMContext):
     try:
         await state.update_data(menu_question=message.text)
@@ -60,6 +71,7 @@ async def menu_questions(message: Message, state: FSMContext):
         print("menu_questions: ", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
 
+# Переход состояния после выбора адреса ресторана
 async def resto_addresses(message: Message, state: FSMContext):
     try:
         await state.update_data(address=message.text)
@@ -76,6 +88,7 @@ async def resto_addresses(message: Message, state: FSMContext):
         await state.clear()
 
 
+# Обработка варианта в выборе "Вопрос по Меню"
 async def self_questions(message: Message, state: FSMContext):
     try:
         await state.update_data(question=message.text)

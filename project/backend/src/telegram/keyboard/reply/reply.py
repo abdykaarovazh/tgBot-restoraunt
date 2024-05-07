@@ -1,13 +1,11 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
-from project.backend.src.db.db_app import app
 from project.backend.src.models.models import Tables
 from project.backend.src.telegram.keyboard.reply.restoaddress import addresses
 
 
 def free_tables_list(address) -> ReplyKeyboardMarkup:
-    print("address free func: ", address)
     try:
         kb = []
         tables = Tables.query.filter_by(address=str(address)).all()
@@ -35,7 +33,11 @@ def feedback_scores() -> ReplyKeyboardMarkup:
         builder.add(KeyboardButton(text=str(i)))
     builder.adjust(1)
 
-    return builder.as_markup(resize_keyboard=False)
+    return builder.as_markup(
+        resize_keyboard=True,
+        input_field_placeholder='Выберите оценку',
+        one_time_keyboard=True
+    )
 
 
 # Функция, возвращающая клавиатуру помощи
@@ -48,8 +50,7 @@ def support_questions() -> ReplyKeyboardMarkup:
     builder.adjust(1)
 
     return builder.as_markup(resize_keyboard=True,
-                             input_field_placeholder='Выберите интересующий Вас вопрос',
-                             one_time_keyboard=True)
+                             input_field_placeholder='Выберите интересующий Вас вопрос')
 
 
 # Функция, возвращающая список адресов ресторана
