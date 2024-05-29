@@ -7,67 +7,96 @@ from project.backend.src.telegram.states import UserStates
 from project.backend.src.telegram.keyboard.reply.reply import free_tables_list, resto_list
 
 from project.backend.src.models.models import Users, Tables
+from project.backend.src.telegram.bot import logger
 
 
 async def reserve(message: Message, state: FSMContext):
     try:
-        kb = resto_list()
-
-        await message.answer("Рады, что ты решил забронировать столик!\n"
-                             "Выбери адрес ресторана, который планируешь посетить, нажав на кнопочку ниже!",
-                             reply_markup=kb)
-        await state.set_state(UserStates.reserve_table)
+        with app.app_context():
+            tg_username = message.from_user.username
+            is_user = Users.get_current(tg_username)
+            if is_user:
+                await message.answer("Рады, что Вы решили забронировать столик!\n"
+                                     "Выберите адрес ресторана, который планируете посетить!",
+                                     reply_markup=resto_list())
+                await state.set_state(UserStates.reserve_table)
+            else:
+                await message.answer("Для того, чтобы зарезервировать столик, "
+                                     "Вам потребуется сначала пройти небольшую регистрацию по команде /start")
     except Exception as e:
-        print("reserve: ", e)
+        logger.exception("reserve", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
 
 async def reserve_address(message: Message, state: FSMContext):
     try:
         with app.app_context():
-            await state.update_data(address=str(message.text))
+            await state.update_data(address=message.text)
+            await message.answer(f"Отлично, напишите, пожалуйста, дату, в которую Вы планируете "
+                                 f"посетить наш ресторан!\n"
+                                 f"\n"
+                                 f"Формат даты должен выглядеть вот так: <b>24.05.2024</b>")
+            await message.answer("Также настоятельно прошу Вас написать <b>актуальную дату</b>. "
+                                 "Если Вы напишете дату <b>ранее, чем сегодняшний день</b>, "
+                                 "то столик забронировать <b>не получится</b>")
 
-            get_data = await state.get_data()
-            address = str(get_data.get('address'))
-            print("address: ", address)
-            markup = free_tables_list(address)
-
-            await message.answer("Отлично, теперь выбери свободный столик!\n"
-                                 "\n"
-                                 "Если у тебя будут какие-либо вопросы, "
-                                 "то ты можешь обязательно обратиться по команде /support!", reply_markup=markup)
-            await state.set_state(UserStates.confirm_reserve_table)
+            await state.set_state(UserStates.set_time)
     except Exception as e:
-        print("reserve_address: ", e)
+        logger.exception("reserve_address: ", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
+
+
+async def set_time_reserve(message: Message, state: FSMContext):
+    try:
+        await state.update_data(date_reserve=message.text)
+        await message.answer("Так, хорошо, а теперь напишите, пожалуйста, время, "
+                             "в которое планируете посетить ресторан в формате: <b>18:00</b>")
+        await state.set_state(UserStates.set_table)
+    except Exception as e:
+        print("set_time_reserve: ", e)
+        await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
+
+
+async def set_table(message: Message, state: FSMContext):
+    try:
+        await state.update_data(time_reserve=message.text)
+        get_data = await state.get_data()
+        address = str(get_data.get('address'))
+        print(address)
+
+        await message.answer("Отлично, а теперь выберите, пожалуйста, <b>свободный столик</b> в списке ниже",
+                             reply_markup = await free_tables_list(address, message.from_user.id))
+        await state.set_state(UserStates.confirm_reserve_table)
+    except Exception as e:
+        logger.exception("set_time_reserve: ", e)
+        await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
+
 
 async def confirm_reserve(message: Message, state: FSMContext):
     try:
         with app.app_context():
-            tg_username = message.from_user.username
+            await state.update_data(table_name=message.text)
 
-            is_user = Users.get_current(tg_username)
+            get_data = await state.get_data()
 
-            if is_user:
-                await state.update_data(table_name=message.text)
+            address = get_data.get('address')
+            table = get_data.get('table_name')
+            time = get_data.get('time_reserve')
+            date = get_data.get('date_reserve')
 
-                get_data = await state.get_data()
-                table_name = get_data.get('table_name')
+            table_name = table[:9]  # Берем только необходимое название стола без количества мест
 
-                reserve_table = Tables.reserve(table_name, tg_username)
+            reserve_table = Tables.reserve(address, table_name, message.from_user.username, time, date)
 
-                if reserve_table is not None:
-                    await message.answer(f"Отлично! {reserve_table.table_name} забронирован!\n"
-                                         f"Через несколько минут с тобой свяжется Администратор ресторана,"
-                                         f"чтобы подтвердить бронь!\n"
-                                         f"\n"
-                                         f"Увидимся :)"
-                                         f"\n"
-                                         f"Обязательно оставь отзыв после того, как "
-                                         f"посетишь наш ресторан по команде /feedback")
-                else:
-                    await message.answer("К сожалению, выбранный вами стол не найден.")
+            await message.answer(f"Отлично! {reserve_table.table_name} забронирован!\n"
+                                 f"Через несколько минут с тобой свяжется Администратор ресторана,"
+                                 f"чтобы подтвердить бронь!\n"
+                                 f"\n"
+                                 f"Увидимся :)"
+                                 f"\n"
+                                 f"Обязательно оставь отзыв после того, как "
+                                 f"посетишь наш ресторан по команде /feedback")
     except Exception as e:
-        print("confirm_reserve: ", e)
+        logger.exception("confirm_reserve: ", e)
         await message.answer("Кажется, произошла какая-то ошибка, извините, пожалуйста, мы решаем эти проблемы....")
     finally:
         await state.clear()

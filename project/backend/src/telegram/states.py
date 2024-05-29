@@ -6,6 +6,8 @@ class UserStates(StatesGroup):
     set_phone = State()
 
     reserve_table = State()
+    set_time = State()
+    set_table = State()
     confirm_reserve_table= State()
 
     feedback_text = State()
@@ -17,4 +19,8 @@ class UserStates(StatesGroup):
     resto_address = State()
 
     your_questions = State()
+    vote_table_before_change_time = State()
+    change_date_time = State()
     user_questions = State()
+    quit_table = State()
+    confirm_quit = State()

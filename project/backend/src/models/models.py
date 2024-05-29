@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from project.backend.src.db.db_app import db
-
+from project.backend.src.telegram.bot import logger
+from datetime import datetime
 
 class Tables(db.Model):
     table_id     = db.Column(db.Integer,     primary_key=True, autoincrement=True)
@@ -9,26 +10,43 @@ class Tables(db.Model):
     place_count  = db.Column(db.Integer,     nullable=False)
     is_reserve   = db.Column(db.String(1),   nullable=True)
     user_name    = db.Column(db.String(128), nullable=True)
-    time_reserve = db.Column(db.DateTime,    nullable=True)
+    time_reserve = db.Column(db.String(20),  nullable=True)
 
-    @staticmethod
-    def reserve(table_name, tg_username):
-        table = Tables.query.filter_by(table_name=table_name).first()
+    @classmethod
+    def get_all(cls, user_name: str, is_reserve: str):
+        all_tables = cls.query.filter_by(user_name=user_name, is_reserve=is_reserve).all()
+        return all_tables if all_tables else None
+
+    @classmethod
+    def reserve(cls, address, table_name, tg_username, time, date):
+        table = cls.query.filter_by(address=address, table_name=table_name).first()
         if table:
             table.is_reserve = 'Y'
             table.user_name = tg_username
+            table.time_reserve = datetime.strptime(f'{date} {time}', '%d.%m.%Y %H:%M')
             db.session.commit()
-        print("Столик забронирован")
+        logger.info("Столик забронирован")
         return table
 
-    @staticmethod
-    def unreserve(tg_username):
-        table = Tables.query.filter_by(user_name=tg_username).first()
-        if table:
-            table.is_reserve = 'N',
+    @classmethod
+    def unreserve(cls, tg_username, table_name):
+        table = cls.query.filter_by(table_name=table_name, user_name=tg_username).first()
+        if table and table.is_reserve == 'Y':
+            table.is_reserve = 'N'
             table.user_name = None
+            table.time_reserve = None
             db.session.commit()
+        logger.info("Столик освободился")
+        return table
 
+    @classmethod
+    def change_date_time(cls, tg_username, table_name, date, time):
+        table = cls.query.filter_by(table_name=table_name, user_name=tg_username).first()
+
+        if table.is_reserve == 'Y':
+            table.time_reserve = datetime.strptime(f'{date} {time}', '%d.%m.%Y %H:%M')
+            db.session.commit()
+            logger.info("Время обновлено")
         return table
 
 
@@ -39,10 +57,14 @@ class Users(db.Model, UserMixin):
     tg_username = db.Column(db.String(128), nullable=False, unique=True)
     user_phone  = db.Column(db.String(12),  nullable=False, unique=True)
 
-    @staticmethod
-    def get_current(tg_username):
-        is_user = Users.query.filter_by(tg_username=tg_username).first()
-        return is_user
+    @classmethod
+    def get_current(cls, tg_username):
+        """
+        :param tg_username:
+        :return: Текущий пользователь
+        """
+        is_user = cls.query.filter_by(tg_username=tg_username).first()
+        return is_user if is_user else None
 
     @classmethod
     def create(cls,
@@ -66,17 +88,8 @@ class Users(db.Model, UserMixin):
             )
             db.session.add(new_user)
             db.session.commit()
-
-            return new_user
         except Exception as e:
-            print(e)
+            logger.exception("create user", e)
             db.session.rollback()
         finally:
             db.session.close()
-
-
-
-
-
-
-

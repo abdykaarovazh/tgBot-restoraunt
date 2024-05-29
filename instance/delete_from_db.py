@@ -6,7 +6,12 @@ def delete_from_db():
         connection = sqlite3.connect('diplom_sun_corner.db')
         cursor = connection.cursor()
 
-        sql_delete = """DELETE FROM users"""
+        # sql_delete = """update tables
+        #                    set user_name = 'airtooooour'
+        #                   where user_name = '1068989629'"""
+        sql_delete = """
+            update 
+        """
         cursor.execute(sql_delete)
         connection.commit()
         print("Успешно удалили записи из БД")

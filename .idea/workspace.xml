@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6f638d3-12d5-4a83-bcef-21bb2691503f" name="Changes" comment="Закончила">
-      <change afterPath="$PROJECT_DIR$/bot_pictures/botpic.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot_pictures/description picture.jpg" afterDir="false" />
+    <list default="true" id="b6f638d3-12d5-4a83-bcef-21bb2691503f" name="Changes" comment="Небольшие доработки">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/delete_from_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/instance/delete_from_db.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/diplom_sun_corner.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/diplom_sun_corner.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/db/db_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/db/db_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/models/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/commands/reserve.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/reserve.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/commands/support.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/commands/support.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/keyboard/reply/reply.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/keyboard/reply/reply.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/run_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/run_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/backend/src/telegram/states.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/backend/src/telegram/states.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,26 +121,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.delete_from_db.executor&quot;: &quot;Run&quot;,
-    &quot;Python.feedback.executor&quot;: &quot;Run&quot;,
-    &quot;Python.inline.executor&quot;: &quot;Run&quot;,
-    &quot;Python.insert_tables.executor&quot;: &quot;Run&quot;,
-    &quot;Python.run_bot.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Артур/Desktop/diplom-diplomych/backend&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;writerside.last.selected.producttgBot-restoraunt&quot;: &quot;r&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Python.config.executor": "Run",
+    "Python.delete_from_db.executor": "Run",
+    "Python.feedback.executor": "Run",
+    "Python.inline.executor": "Run",
+    "Python.insert_tables.executor": "Run",
+    "Python.run_bot.executor": "Run",
+    "Python.support.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/LEARNING/learning",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "writerside.last.selected.producttgBot-restoraunt": "r"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
+  "keyToStringList": {
+    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": []
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\tgBot-restoraunt\readme\topics" />
@@ -233,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715011682091</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Небольшие доработки">
+      <option name="closed" value="true" />
+      <created>1715101058923</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1715101058923</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -254,6 +268,7 @@
     <MESSAGE value="Дополнение основных модулей, добавление новых команд.&#10;&#10;В следующий раз, сделаем ссылку на Меню ресторана" />
     <MESSAGE value="Сделаны reserve, feedback" />
     <MESSAGE value="Закончила" />
-    <option name="LAST_COMMIT_MESSAGE" value="Закончила" />
+    <MESSAGE value="Небольшие доработки" />
+    <option name="LAST_COMMIT_MESSAGE" value="Небольшие доработки" />
   </component>
 </project>
