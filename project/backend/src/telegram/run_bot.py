@@ -39,6 +39,7 @@ if __name__ == '__main__':
     # ЕСЛИ НУЖНО ЗАСКРИНИТЬ УВЕДОМЛЕНИЕ, ТО РАСКОММЕНТИРОВАТЬ СТРОЧКУ НИЖЕ, УДАЛИВ РЕШЕТКУ
     #dp.startup.register(on_startup)
 
+
     # Регистрация команды /start
     dp.message.register(start, CommandStart())
     dp.message.register(set_name, UserStates.set_name)
